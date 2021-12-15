@@ -18,7 +18,15 @@ steps:
   displayName: install Terraform v0.12.28
   inputs:
     terraformVersion: '0.12.28'
-
+- task: TerraformTaskV2@2
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'SP-devops'
+    backendAzureRmResourceGroupName: 'SAESA'
+    backendAzureRmStorageAccountName: 'pruebasaesa'
+    backendAzureRmContainerName: 'terra'
+    backendAzureRmKey: 'terra.terraform.tfstate'
 - task: TerraformTaskV2@2
   displayName: terraform init
   inputs:
