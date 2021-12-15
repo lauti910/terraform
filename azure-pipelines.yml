@@ -10,7 +10,7 @@ variables:
   resourceGroup: SAESA
   storageAccount: pruebasaesa
   container: terra
-  tfstateFile: terraform.terra
+  tfstateFile: terra.terraform.tfstate
   anyTfChanges: false
 
 steps:
@@ -19,7 +19,7 @@ steps:
   inputs:
     terraformVersion: '1.1.0'
 - task: TerraformTaskV2@2
-  displayName: terraform init - luca
+  displayName: terraform init
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -30,11 +30,10 @@ steps:
     backendAzureRmKey: 'terra.terraform.tfstate'
 
 - task: TerraformTaskV2@2
-  displayName: terraform init
+  displayName: terraform init 2
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
     backendServiceArm: '$(subscription)'
     backendAzureRmResourceGroupName: '$(resourceGroup)'
     backendAzureRmStorageAccountName: '$(storageAccount)'
@@ -46,7 +45,6 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
     commandOptions: '-out=tfplan'
     # commandOptions: '-detailed-exitcode -out=tfplan'
     environmentServiceNameAzureRM: '$(subscription)'
