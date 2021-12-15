@@ -24,3 +24,8 @@ resource "azurerm_data_factory" "rg" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
+
+resource "azurerm_resource_group" "probando" {
+  name     = "Terraform"
+  location = "eastus2"
+}
