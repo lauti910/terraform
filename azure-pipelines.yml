@@ -52,7 +52,6 @@ steps:
 - task: PowerShell@2
   displayName: detect any terraform change
   inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
     targetType: 'inline'
     script: |
       # Write-Host "LASTEXITCODE : $LASTEXITCODE"
