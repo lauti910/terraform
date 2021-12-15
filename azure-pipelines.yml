@@ -6,7 +6,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  subscription: 'SP-devops'
+  subscription: SP-devops
   resourceGroup: SAESA
   storageAccount: pruebasaesa
   container: terra
