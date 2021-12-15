@@ -4,15 +4,14 @@
 
 pool:
   vmImage: 'ubuntu-latest'
-  
 
 variables:
-  subscription: SP-devops
-  resourceGroup: SAESA
-  storageAccount: pruebasaesa
-  container: terra
-  tfstateFile: terraform.terra
-  anyTfChanges: false
+  subscription: SP-devops
+  resourceGroup: SAESA
+  storageAccount: pruebasaesa
+  container: terra
+  tfstateFile: terraform.terra
+  anyTfChanges: false
 
 steps:
 - task: TerraformInstaller@0
