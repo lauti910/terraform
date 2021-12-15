@@ -57,3 +57,11 @@ steps:
       {
         Write-Host "There is no change detected in Terraform tfplan file"
       }
+- task: TerraformTaskV2@2
+  displayName: terraform apply tfplan
+  condition: eq(variables.anyTfChanges, true)
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    commandOptions: 'tfplan'
+    environmentServiceNameAzureRM: '$(subscription)'
