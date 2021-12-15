@@ -12,16 +12,7 @@ variables:  
   container: terra  
   tfstateFile: terraform.terra  
   anyTfChanges: false
-
-
-variables:
-  subscription: Suscripción de Ergorenova(c44e04a9-828f-4e12-860e-501e60d8c9f7)
-  resourceGroup: resourcegroup-tfstate
-  storageAccount: terraformtfstateskip
-  container: tfstate
-  tfstateFile: terraform.tfstate
-  anyTfChanges: false
-
+  
 steps:
 
 - task: TerraformInstaller@0
