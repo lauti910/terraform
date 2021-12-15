@@ -6,7 +6,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  subscription: Visual Studio Enterprise(17b12858-3960-4e6f-a663-a06fdae23428)
+  subscription: Suscripción de Ergorenova(c44e04a9-828f-4e12-860e-501e60d8c9f7)
   resourceGroup: resourcegroup-tfstate
   storageAccount: terraformtfstateskip
   container: tfstate
