@@ -20,7 +20,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_data_factory" "rg" {
-  name                = "df-ergo-dev"
+  name                = "df-ergo"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -28,4 +28,9 @@ resource "azurerm_data_factory" "rg" {
 resource "azurerm_resource_group" "dev" {
   name     = "SAESA-Dev"
   location = "eastus2"
+}
+resource "azurerm_data_factory" "dev" {
+  name                = "df-ergo-dev"
+  location            = azurerm_resource_group.dev.location
+  resource_group_name = azurerm_resource_group.dev.name
 }
