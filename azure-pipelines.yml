@@ -4,14 +4,36 @@
 
 pool:
   vmImage: 'ubuntu-latest'
+  
+trigger:
+  - master
+  - development
+  - testing
+   
 
 variables:
-  subscription: SP-devops
-  resourceGroup: SAESA
-  storageAccount: pruebasaesa
-  container: terra
-  tfstateFile: terra.terraform.tfstate
-  anyTfChanges: false
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}: 
+    subscription: SP-devops
+    resourceGroup: SAESA
+    storageAccount: pruebasaesa
+    container: terra
+    tfstateFile: terra.terraform.tfstate
+    anyTfChanges: false
+  ${{ if eq(variables['Build.SourceBranchName'], 'development') }}: 
+    subscription: SP-devops
+    resourceGroup: SAESA-Dev
+    storageAccount: pruebasaesa
+    container: terra
+    tfstateFile: terra.terraform.tfstate
+    anyTfChanges: false
+  ${{ if eq(variables['Build.SourceBranchName'], 'testing') }}: 
+    subscription: SP-devops
+    resourceGroup: SAESA-Test
+    storageAccount: pruebasaesa
+    container: terra
+    tfstateFile: terra.terraform.tfstate
+    anyTfChanges: false
+  
 
 steps:
 - task: TerraformInstaller@0
@@ -20,7 +42,7 @@ steps:
     terraformVersion: '1.1.0'
 
 - task: TerraformTaskV2@2
-  displayName: terraform init 2
+  displayName: terraform init
   inputs:
     provider: 'azurerm'
     command: 'init'
