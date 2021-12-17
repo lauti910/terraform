@@ -18,10 +18,6 @@ resource "azurerm_resource_group" "rg" {
   name     = "SAESA"
   location = "eastus2"
 }
-resource "azurerm_resource_group" "rg" {
-  name     = "ERGO"
-  location = "eastus2"
-}
 
 resource "azurerm_data_factory" "rg" {
   name                = "df-ergo-dev"
