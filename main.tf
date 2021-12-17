@@ -32,3 +32,4 @@ resource "azurerm_data_factory" "rg" {
 resource "azurerm_resource_group" "dev" {
   name     = "SAESA-Dev"
   location = "eastus2"
+}
