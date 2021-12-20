@@ -18,6 +18,12 @@ variable "resource_group_name" {
   type = string
   default = "SAESA"
 }
+backend "azurerm" {    
+  resource_group_name  = var.resource_group_name
+  storage_account_name = "pruebasaesa"
+  container_name       = "terra"
+  key                  = "terra.terraform.tfstate"  
+}
 
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
