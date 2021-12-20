@@ -51,14 +51,6 @@ resource "azurerm_data_factory" "test" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-resource "azurerm_storage_account" "rg" {
-  name                     = "pruebasaesa${var.suffix}"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
 resource "azurerm_databricks_workspace" "rg" {
   name                = "databricks-prod${var.suffix}"
   resource_group_name = azurerm_resource_group.rg.name
