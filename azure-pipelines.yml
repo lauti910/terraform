@@ -41,7 +41,7 @@ steps:
     backendServiceArm: '$(subscription)'
     backendAzureRmResourceGroupName: '$(resourceGroup)-$(suffix)'
     backendAzureRmStorageAccountName: '$(storageAccount)'
-    backendAzureRmContainerName: '$(container)-$(suffix)'
+    backendAzureRmContainerName: '$(container)'
     backendAzureRmKey: '$(tfstateFile)'
 
 - task: TerraformTaskV2@2
