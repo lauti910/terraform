@@ -35,7 +35,7 @@ steps:
     provider: 'azurerm'
     command: 'init'
     backendServiceArm: '$(subscription)'
-    backendAzureRmResourceGroupName: '$(resourceGroup)$(suffix)'
+    backendAzureRmResourceGroupName: '$(resourceGroup)'
     backendAzureRmStorageAccountName: '$(storageAccount)'
     backendAzureRmContainerName: '$(container)'
     backendAzureRmKey: '$(tfstateFile)'
