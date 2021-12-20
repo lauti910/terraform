@@ -6,7 +6,12 @@ terraform {
       version = "~> 2.65"
     }
   }
-
+  backend "azurerm" {    
+    resource_group_name  = "SAESA"
+    storage_account_name = "pruebasaesa"
+    container_name       = "terra"
+    key                  = "terra.terraform.tfstate"  
+}
   required_version = ">= 1.1.0"
 }
 
