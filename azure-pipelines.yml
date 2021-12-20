@@ -15,13 +15,16 @@ variables:
   subscription: SP-devops
   resourceGroup: SAESA
   storageAccount: pruebasaesa
-  container: terra
-  tfstateFile: terra.terraform.tfstate
   anyTfChanges: false
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}: 
+    container: terra
+    tfstateFile: terra.terraform.tfstate
     suffix: ''
   ${{ if eq(variables['Build.SourceBranchName'], 'development') }}: 
+    container: terra-dev
+    tfstateFile: terra-dev.terraform.tfstate
     suffix: 'dev'
+    
   
 
 steps:
@@ -46,7 +49,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    commandOptions: '-out=tfplan'
+    commandOptions: '-out=tfplan -var="resource_group_name=$(subscription)-$(suffix)"'
     # commandOptions: '-detailed-exitcode -out=tfplan'
     environmentServiceNameAzureRM: '$(subscription)'
 
@@ -70,9 +73,10 @@ steps:
       }
 - task: TerraformTaskV2@2
   displayName: terraform apply tfplan
-  condition: eq(variables.anyTfChanges, true)
+  #condition: eq(variables.anyTfChanges, true)
+  condition: eq(false, true)
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    commandOptions: 'tfplan'
+    commandOptions: 'tfplan -var="resource_group_name=$(subscription)-$(suffix)"'
     environmentServiceNameAzureRM: '$(subscription)'
