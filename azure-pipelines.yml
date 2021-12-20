@@ -9,23 +9,19 @@ trigger:
   - master
   - development
   - testing
-   
 
 variables:
   subscription: SP-devops
   resourceGroup: SAESA
   storageAccount: pruebasaesa
   anyTfChanges: false
+  tfstateFile: terraform.tfstate
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}: 
     container: terra
-    tfstateFile: terra.terraform
     suffix: ''
   ${{ if eq(variables['Build.SourceBranchName'], 'development') }}: 
     container: terra-dev
-    tfstateFile: terra-dev.terraform
     suffix: '-dev'
-    
-  
 
 steps:
 - task: TerraformInstaller@0
