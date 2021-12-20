@@ -18,7 +18,7 @@ variables:
   anyTfChanges: false
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}: 
     container: terra
-    tfstateFile: terra.terraform.tfstate
+    tfstateFile: terra.terraform
     suffix: ''
   ${{ if eq(variables['Build.SourceBranchName'], 'development') }}: 
     container: terra-dev
