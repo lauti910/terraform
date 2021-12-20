@@ -71,9 +71,3 @@ resource "azurerm_databricks_workspace" "dev" {
     Environment = "Development"
   }
 }
-
-resource "azurerm_logic_app_workflow" "rg" {
-  name                = "logic_app_ergo"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-}
