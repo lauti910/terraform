@@ -22,7 +22,7 @@ variables:
     suffix: ''
   ${{ if eq(variables['Build.SourceBranchName'], 'development') }}: 
     container: terra-dev
-    tfstateFile: terra-dev.terraform.tfstate
+    tfstateFile: terra-dev.terraform
     suffix: '-dev'
     
   
