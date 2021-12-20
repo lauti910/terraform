@@ -45,7 +45,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    commandOptions: '-out=tfplan -var="resource_group_name=$(resourceGroup)$(suffix)"'
+    commandOptions: '-out=tfplan -var="resource_group_name=$(resourceGroup)$(suffix)" -var"suffix=$(suffix)"'
     # commandOptions: '-detailed-exitcode -out=tfplan'
     environmentServiceNameAzureRM: '$(subscription)'
 
@@ -74,5 +74,5 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    commandOptions: 'tfplan -var="resource_group_name=$(resourceGroup)$(suffix)"'
+    commandOptions: 'tfplan -var="resource_group_name=$(resourceGroup)$(suffix)" -var"suffix=$(suffix)"'
     environmentServiceNameAzureRM: '$(subscription)'
