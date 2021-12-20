@@ -15,8 +15,6 @@ variables:
   subscription: SP-devops
   resourceGroup: SAESA
   storageAccount: pruebasaesa
-  container: terra
-  tfstateFile: terra.terraform.tfstate
   anyTfChanges: false
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}: 
     container: terra
