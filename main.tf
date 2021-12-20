@@ -31,24 +31,36 @@ variable "suffix" {
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = "eastus2"
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_data_factory" "rg" {
   name                = "df-ergo-prod${var.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "azurerm_data_factory" "dev" {
   name                = "df-ergo-dev-1${var.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "azurerm_data_factory" "test" {
   name                = "df-ergo-dev-2${var.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "azurerm_databricks_workspace" "rg" {
