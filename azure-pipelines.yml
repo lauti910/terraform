@@ -9,23 +9,19 @@ trigger:
   - master
   - development
   - testing
-   
 
 variables:
   subscription: SP-devops
   resourceGroup: SAESA
   storageAccount: pruebasaesa
   anyTfChanges: false
+  tfstateFile: terraform.tfstate
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}: 
     container: terra
-    tfstateFile: terra.terraform
     suffix: ''
   ${{ if eq(variables['Build.SourceBranchName'], 'development') }}: 
     container: terra-dev
-    tfstateFile: terra-dev.terraform.tfstate
     suffix: '-dev'
-    
-  
 
 steps:
 - task: TerraformInstaller@0
@@ -39,7 +35,7 @@ steps:
     provider: 'azurerm'
     command: 'init'
     backendServiceArm: '$(subscription)'
-    backendAzureRmResourceGroupName: '$(resourceGroup)$(suffix)'
+    backendAzureRmResourceGroupName: '$(resourceGroup)'
     backendAzureRmStorageAccountName: '$(storageAccount)'
     backendAzureRmContainerName: '$(container)'
     backendAzureRmKey: '$(tfstateFile)'
@@ -49,7 +45,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    commandOptions: '-out=tfplan -var="resource_group_name=$(resourceGroup)$(suffix)"'
+    commandOptions: '-out=tfplan -var="resource_group_name=$(resourceGroup)$(suffix)" -var="suffix=$(suffix)"'
     # commandOptions: '-detailed-exitcode -out=tfplan'
     environmentServiceNameAzureRM: '$(subscription)'
 
@@ -78,5 +74,5 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    commandOptions: 'tfplan -var="resource_group_name=$(resourceGroup)$(suffix)"'
+    commandOptions: 'tfplan -var="resource_group_name=$(resourceGroup)$(suffix)" -var="suffix=$(suffix)"'
     environmentServiceNameAzureRM: '$(subscription)'

@@ -10,7 +10,7 @@ terraform {
     resource_group_name  = "SAESA"
     storage_account_name = "pruebasaesa"
     container_name       = "terra"
-    key                  = "terra.terraform.tfstate"  
+    key                  = "terraform.tfstate"  
 }
   required_version = ">= 1.1.0"
 }
@@ -23,6 +23,10 @@ variable "resource_group_name" {
   type = string
   default = "SAESA"
 }
+variable "suffix" {
+  type = string
+  default = ""
+}
 
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
@@ -30,33 +34,25 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_data_factory" "rg" {
-  name                = "df-ergo-prod"
+  name                = "df-ergo-prod${var.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_data_factory" "dev" {
-  name                = "df-ergo-dev-1"
+  name                = "df-ergo-dev-1${var.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_data_factory" "test" {
-  name                = "df-ergo-dev-2"
+  name                = "df-ergo-dev-2${var.suffix}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-resource "azurerm_storage_account" "rg" {
-  name                     = "pruebasaesa"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
 resource "azurerm_databricks_workspace" "rg" {
-  name                = "databricks-prod"
+  name                = "databricks-prod${var.suffix}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   sku                 = "standard"
@@ -67,7 +63,7 @@ resource "azurerm_databricks_workspace" "rg" {
 }
 
 resource "azurerm_databricks_workspace" "dev" {
-  name                = "databricks-dev"
+  name                = "databricks-dev${var.suffix}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   sku                 = "standard"
