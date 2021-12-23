@@ -11,7 +11,7 @@ terraform {
     storage_account_name = "pruebasaesa"
     container_name       = "terra"
     key                  = "terraform.tfstate"  
-}
+  }
   required_version = ">= 1.1.0"
 }
 
