@@ -21,7 +21,7 @@ variables:
     suffix: ''
   ${{ if eq(variables['Build.SourceBranchName'], 'development') }}: 
     container: terra-dev
-    suffix: "'-dev'"
+    suffix: '-dev'
 
 steps:
 - task: TerraformInstaller@0
@@ -69,8 +69,8 @@ steps:
       }
 - task: TerraformTaskV2@2
   displayName: terraform apply tfplan
-  condition: eq(variables.anyTfChanges, true)
-  #condition: eq(false, true)
+  #condition: eq(variables.anyTfChanges, true)
+  condition: eq(false, true)
   inputs:
     provider: 'azurerm'
     command: 'apply'
